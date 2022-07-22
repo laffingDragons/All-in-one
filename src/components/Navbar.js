@@ -1,11 +1,24 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { matchRoutes, useLocation } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+
+
 
 export default function Navbar() {
+
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+    console.log("🚀 ~ Navbar ~ pathname", pathname);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top " style={{ "backgroundImage": "url(https://userscontent2.emaze.com/images/f9538183-0ff9-478f-b964-c8ab90421e3b/3d28e192fda5c17250f96a2779c84475.jpg)"}}>
             <div className="container-fluid">
+                {pathname == '/' ? 
                 <NavLink   className="navbar-brand" to="/">All Stars</NavLink>
+                :
+                <div   className="navbar-brand" onClick={()=>{navigate(-1)}}><FaArrowLeft/></div>
+                }
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
